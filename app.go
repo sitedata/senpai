@@ -160,6 +160,7 @@ func NewApp(cfg Config) (app *App, err error) {
 			app.mergeLine(former, addition)
 		},
 		Colors: cfg.Colors,
+		Tty:    cfg.Tty,
 	})
 	if err != nil {
 		return

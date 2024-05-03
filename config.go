@@ -115,6 +115,7 @@ type Config struct {
 
 	Debug     bool
 	Transient bool
+	Tty       tcell.Tty
 }
 
 func DefaultHighlightPath() (string, error) {

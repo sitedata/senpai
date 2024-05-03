@@ -22,6 +22,7 @@ type Config struct {
 	Mouse            bool
 	MergeLine        func(former *Line, addition Line)
 	Colors           ConfigColors
+	Tty              tcell.Tty
 }
 
 type ConfigColors struct {
@@ -63,7 +64,12 @@ func New(config Config) (ui *UI, err error) {
 		ui.memberWidth = config.MemberColWidth
 	}
 
-	ui.screen, err = tcell.NewScreen()
+	if config.Tty == nil {
+		ui.screen, err = tcell.NewScreen()
+	} else {
+		ui.screen, err = tcell.NewTerminfoScreenFromTty(config.Tty)
+	}
+
 	if err != nil {
 		return
 	}
